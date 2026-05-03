@@ -7,8 +7,8 @@
 <style>
 body {
   margin:0;
-  font-family: Arial, sans-serif;
-  background:#f1f5f9;
+  font-family: 'Segoe UI', sans-serif;
+  background:#f8fafc;
 }
 
 header {
@@ -20,27 +20,31 @@ header {
 
 nav {
   background:#1e293b;
-  padding:10px;
+  padding:12px;
   text-align:center;
 }
 
-nav a {
+nav button {
+  margin:5px;
+  padding:10px 15px;
+  border:none;
+  cursor:pointer;
+  background:#2563eb;
   color:white;
-  margin:10px;
-  text-decoration:none;
+  border-radius:5px;
 }
 
 .container {
-  padding:20px;
   max-width:900px;
   margin:auto;
+  padding:20px;
 }
 
 .card {
   background:white;
   padding:20px;
   border-radius:10px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
   margin-top:20px;
 }
 
@@ -50,9 +54,9 @@ input {
   margin:10px 0;
 }
 
-button {
-  padding:12px;
+button.action {
   width:100%;
+  padding:12px;
   background:#2563eb;
   color:white;
   border:none;
@@ -60,31 +64,18 @@ button {
   font-size:16px;
 }
 
-button:hover {
-  background:#1d4ed8;
-}
-
 #certificate {
+  display:none;
   margin-top:20px;
   padding:30px;
-  border:2px solid #000;
+  border:2px solid black;
   background:white;
-  display:none;
 }
 
-.title {
-  text-align:center;
-  font-size:24px;
-  font-weight:bold;
-}
+.center { text-align:center; }
+.title { font-size:22px; font-weight:bold; text-align:center; }
 
-.center {
-  text-align:center;
-}
-
-.signature {
-  margin-top:40px;
-}
+.hidden { display:none; }
 </style>
 </head>
 
@@ -92,68 +83,96 @@ button:hover {
 
 <header>
   <h1>TechNova Solutions Pvt. Ltd.</h1>
-  <p>Innovating the Future of Software</p>
+  <p>Professional Certificate Management System</p>
 </header>
 
 <nav>
-  <a href="#">Home</a>
-  <a href="#">Services</a>
-  <a href="#">Careers</a>
+  <button onclick="showSection('gen')">Generate</button>
+  <button onclick="showSection('verify')">Verify</button>
 </nav>
 
 <div class="container">
 
-<div class="card">
-<h2>Internship Certificate Generator</h2>
+<!-- GENERATOR -->
+<div id="gen" class="card">
+<h2>Create Certificate</h2>
 
-<input id="name" placeholder="Enter Student Name">
-<input id="role" placeholder="Enter Role (Web Developer Intern)">
-<input id="duration" placeholder="Duration (Jan 2025 - Mar 2025)">
+<input id="name" placeholder="Student Name">
+<input id="role" placeholder="Role">
+<input id="duration" placeholder="Duration">
 
-<button onclick="generate()">Generate Certificate</button>
-<button onclick="downloadPDF()">Download as PDF</button>
-</div>
+<button class="action" onclick="generate()">Generate Certificate</button>
 
 <div id="certificate">
   <div class="title">INTERNSHIP CERTIFICATE</div>
-
   <p id="certText"></p>
 
-  <p class="center"><b>Certificate ID:</b> <span id="certID"></span></p>
+  <p class="center"><b>ID:</b> <span id="certID"></span></p>
   <p class="center"><b>Date:</b> <span id="date"></span></p>
 
-  <div class="signature">
-    <p>Sincerely,</p>
-    <p><b>HR Manager</b></p>
-    <p>TechNova Solutions Pvt. Ltd.</p>
+  <div class="center">
+    <img id="qr" width="120">
   </div>
+
+  <p>Sincerely,<br><b>HR Manager</b></p>
+</div>
+</div>
+
+<!-- VERIFY -->
+<div id="verify" class="card hidden">
+<h2>Verify Certificate</h2>
+
+<input id="verifyID" placeholder="Enter Certificate ID">
+<button class="action" onclick="verify()">Verify</button>
+
+<p id="result"></p>
 </div>
 
 </div>
 
 <script>
+let db = JSON.parse(localStorage.getItem("certDB") || "{}");
+
+function showSection(section) {
+  document.getElementById("gen").classList.add("hidden");
+  document.getElementById("verify").classList.add("hidden");
+  document.getElementById(section).classList.remove("hidden");
+}
+
 function generate() {
   let name = document.getElementById("name").value;
   let role = document.getElementById("role").value;
   let duration = document.getElementById("duration").value;
 
-  let today = new Date().toLocaleDateString();
   let id = "TN-" + Math.floor(Math.random()*100000);
+  let date = new Date().toLocaleDateString();
 
-  document.getElementById("certText").innerText =
-  "This is to certify that " + name +
-  " has successfully completed an internship as a " + role +
-  " at TechNova Solutions Pvt. Ltd. during the period of " + duration +
-  ". The candidate demonstrated excellent skills and professionalism.";
+  let text = name + " completed internship as " + role + " during " + duration;
 
+  db[id] = {name, role, duration, date};
+  localStorage.setItem("certDB", JSON.stringify(db));
+
+  document.getElementById("certText").innerText = text;
   document.getElementById("certID").innerText = id;
-  document.getElementById("date").innerText = today;
+  document.getElementById("date").innerText = date;
+
+  let url = window.location.href + "?id=" + id;
+  document.getElementById("qr").src =
+    "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=" + url;
 
   document.getElementById("certificate").style.display = "block";
 }
 
-function downloadPDF() {
-  window.print();
+function verify() {
+  let id = document.getElementById("verifyID").value;
+
+  if(db[id]) {
+    document.getElementById("result").innerText =
+      "Valid Certificate: " + db[id].name;
+  } else {
+    document.getElementById("result").innerText =
+      "Invalid Certificate ❌";
+  }
 }
 </script>
 
