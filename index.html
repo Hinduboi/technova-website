@@ -63,6 +63,7 @@ button.action {
   border:2px solid black;
   padding:20px;
   margin-top:20px;
+  background:white;
 }
 
 footer {
@@ -78,8 +79,9 @@ footer {
 <body>
 
 <header>
+<img src="https://cdn-icons-png.flaticon.com/512/2721/2721297.png" width="60">
 <h1>TechNova Solutions Pvt. Ltd.</h1>
-<p>Building Scalable Software & Digital Products</p>
+<p>Empowering Innovation Through Technology</p>
 </header>
 
 <nav>
@@ -95,7 +97,7 @@ footer {
 <!-- HOME -->
 <div id="home" class="card">
 <h2>Welcome to TechNova</h2>
-<p>We are a modern software company delivering high-quality web applications, automation tools, and scalable digital products.</p>
+<p>We are a modern software company delivering scalable web applications, automation tools, and digital solutions.</p>
 
 <h3>Why Choose Us?</h3>
 <ul>
@@ -103,6 +105,8 @@ footer {
 <li>Fast Development</li>
 <li>Scalable Solutions</li>
 </ul>
+
+<p><b>Trusted by startups and students across India.</b></p>
 </div>
 
 <!-- SERVICES -->
@@ -129,11 +133,10 @@ footer {
 <!-- PRODUCTS -->
 <div id="product" class="card hidden">
 <h2>Our Product</h2>
-<p>We provide an internal Certificate Management System used for generating and verifying internship certificates.</p>
+<p>We provide an internal Certificate Management System for generating and verifying internship certificates.</p>
 
 <button onclick="showGenerator()">Open System</button>
 
-<!-- GENERATOR (hidden inside product) -->
 <div id="generator" class="hidden">
 
 <h3>Certificate Generator</h3>
@@ -142,10 +145,10 @@ footer {
 <input id="role" placeholder="Role">
 <input id="duration" placeholder="Duration">
 
-<button class="action" onclick="generate()">Generate</button>
+<button class="action" onclick="generate()">Generate Certificate</button>
 
 <div id="certificate">
-<h3>INTERNSHIP CERTIFICATE</h3>
+<h3 style="text-align:center;">INTERNSHIP CERTIFICATE</h3>
 
 <p id="text"></p>
 
@@ -154,7 +157,10 @@ footer {
 
 <img id="qr" width="120">
 
-<p>Sincerely,<br>HR Manager</p>
+<br><br>
+<button onclick="downloadPDF()">Download Certificate (PDF)</button>
+
+<p style="margin-top:20px;">Sincerely,<br><b>HR Manager</b><br>TechNova Solutions Pvt. Ltd.</p>
 </div>
 
 </div>
@@ -164,7 +170,7 @@ footer {
 <div id="contact" class="card hidden">
 <h2>Contact Us</h2>
 <p>Email: technova@email.com</p>
-<p>LinkedIn: TechNova Solutions</p>
+<p>Location: New Delhi, India</p>
 </div>
 
 </div>
@@ -198,7 +204,8 @@ function generate() {
   localStorage.setItem("db", JSON.stringify(db));
 
   document.getElementById("text").innerText =
-  name + " completed internship as " + role + " during " + duration;
+  name + " has successfully completed internship as " + role +
+  " during " + duration + " at TechNova Solutions Pvt. Ltd.";
 
   document.getElementById("cid").innerText = id;
   document.getElementById("date").innerText = date;
@@ -207,6 +214,17 @@ function generate() {
   "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=" + id;
 
   document.getElementById("certificate").style.display = "block";
+}
+
+function downloadPDF() {
+  let content = document.getElementById("certificate").innerHTML;
+
+  let win = window.open('', '', 'height=700,width=700');
+  win.document.write('<html><head><title>Certificate</title></head><body>');
+  win.document.write(content);
+  win.document.write('</body></html>');
+  win.document.close();
+  win.print();
 }
 </script>
 
