@@ -5,28 +5,33 @@
 <title>TechNova Solutions</title>
 
 <style>
-body {margin:0;font-family:Arial;background:#f8fafc;}
+body {
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background:#eef2f7;
+}
 
 header {
-  background:#0f172a;
+  background:linear-gradient(90deg,#0f172a,#1e293b);
   color:white;
-  padding:20px;
+  padding:25px;
   text-align:center;
 }
 
 nav {
-  background:#1e293b;
-  padding:12px;
+  background:#111827;
+  padding:10px;
   text-align:center;
 }
 
 nav button {
   margin:5px;
-  padding:10px 15px;
+  padding:10px 18px;
   border:none;
-  background:#2563eb;
+  background:#3b82f6;
   color:white;
   cursor:pointer;
+  border-radius:5px;
 }
 
 .container {
@@ -37,31 +42,36 @@ nav button {
 
 .card {
   background:white;
-  padding:20px;
+  padding:25px;
   margin-top:20px;
-  border-radius:10px;
+  border-radius:12px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
 }
 
 .hidden {display:none;}
 
 input {
   width:100%;
-  padding:10px;
+  padding:12px;
   margin:10px 0;
+  border-radius:6px;
+  border:1px solid #ccc;
 }
 
 button.action {
   width:100%;
-  padding:12px;
+  padding:14px;
   background:#2563eb;
   color:white;
   border:none;
+  font-size:16px;
+  border-radius:6px;
 }
 
 #certificate {
   display:none;
-  border:2px solid black;
-  padding:20px;
+  border:3px solid #111;
+  padding:30px;
   margin-top:20px;
   background:white;
 }
@@ -79,9 +89,9 @@ footer {
 <body>
 
 <header>
-<img src="https://cdn-icons-png.flaticon.com/512/2721/2721297.png" width="60">
+<img src="https://cdn-icons-png.flaticon.com/512/2721/2721297.png" width="70">
 <h1>TechNova Solutions Pvt. Ltd.</h1>
-<p>Empowering Innovation Through Technology</p>
+<p>Building Scalable Software & Digital Innovation</p>
 </header>
 
 <nav>
@@ -97,26 +107,26 @@ footer {
 <!-- HOME -->
 <div id="home" class="card">
 <h2>Welcome to TechNova</h2>
-<p>We are a modern software company delivering scalable web applications, automation tools, and digital solutions.</p>
+<p>TechNova Solutions Pvt. Ltd. is a forward-thinking software company delivering cutting-edge digital solutions, web applications, and automation systems.</p>
 
 <h3>Why Choose Us?</h3>
 <ul>
-<li>Modern Tech Stack</li>
-<li>Fast Development</li>
-<li>Scalable Solutions</li>
+<li>Industry-relevant solutions</li>
+<li>Scalable and modern architecture</li>
+<li>Fast and efficient delivery</li>
 </ul>
 
-<p><b>Trusted by startups and students across India.</b></p>
+<p><b>Trusted by startups and learners across India.</b></p>
 </div>
 
 <!-- SERVICES -->
 <div id="services" class="card hidden">
 <h2>Our Services</h2>
 <ul>
-<li>Web Development</li>
-<li>App Development</li>
-<li>AI Tools</li>
-<li>Automation Systems</li>
+<li>Full Stack Web Development</li>
+<li>Mobile App Development</li>
+<li>AI & Automation Tools</li>
+<li>Custom Software Solutions</li>
 </ul>
 </div>
 
@@ -124,35 +134,48 @@ footer {
 <div id="projects" class="card hidden">
 <h2>Projects</h2>
 <ul>
-<li>Portfolio Websites</li>
-<li>Business Dashboards</li>
+<li>Business Automation Dashboard</li>
+<li>Portfolio & Resume Platforms</li>
 <li>Certificate Management System</li>
 </ul>
 </div>
 
-<!-- PRODUCTS -->
+<!-- PRODUCT -->
 <div id="product" class="card hidden">
 <h2>Our Product</h2>
-<p>We provide an internal Certificate Management System for generating and verifying internship certificates.</p>
+<p>Our internal Certificate Management System helps organizations generate, manage, and verify internship certificates efficiently.</p>
 
-<button onclick="showGenerator()">Open System</button>
+<button onclick="showGenerator()">Launch System</button>
 
 <div id="generator" class="hidden">
 
 <h3>Certificate Generator</h3>
 
 <input id="name" placeholder="Student Name">
-<input id="role" placeholder="Role">
-<input id="duration" placeholder="Duration">
+<input id="role" placeholder="Role (e.g., Web Developer Intern)">
+<input id="duration" placeholder="Duration (Jan 2025 - Mar 2025)">
 
 <button class="action" onclick="generate()">Generate Certificate</button>
 
 <div id="certificate">
-<h3 style="text-align:center;">INTERNSHIP CERTIFICATE</h3>
+
+<h2 style="text-align:center;">INTERNSHIP CERTIFICATE</h2>
 
 <p id="text"></p>
 
-<p><b>ID:</b> <span id="cid"></span></p>
+<p>
+During the internship period, the candidate was actively involved in real-time project development, collaborated with the team, and demonstrated strong problem-solving skills and professionalism.
+</p>
+
+<p>
+We found the candidate to be sincere, hardworking, and eager to learn new technologies. Their performance was commendable throughout the internship duration.
+</p>
+
+<p>
+We wish them success in all future professional endeavors.
+</p>
+
+<p><b>Certificate ID:</b> <span id="cid"></span></p>
 <p><b>Date:</b> <span id="date"></span></p>
 
 <img id="qr" width="120">
@@ -160,9 +183,13 @@ footer {
 <br><br>
 <button onclick="downloadPDF()">Download Certificate (PDF)</button>
 
-<p style="margin-top:20px;">Sincerely,<br><b>HR Manager</b><br>TechNova Solutions Pvt. Ltd.</p>
-</div>
+<p style="margin-top:30px;">
+Sincerely,<br>
+<b>HR Manager</b><br>
+TechNova Solutions Pvt. Ltd.
+</p>
 
+</div>
 </div>
 </div>
 
@@ -204,8 +231,9 @@ function generate() {
   localStorage.setItem("db", JSON.stringify(db));
 
   document.getElementById("text").innerText =
-  name + " has successfully completed internship as " + role +
-  " during " + duration + " at TechNova Solutions Pvt. Ltd.";
+  "This is to certify that " + name +
+  " has successfully completed an internship as a " + role +
+  " at TechNova Solutions Pvt. Ltd. during the period of " + duration + ".";
 
   document.getElementById("cid").innerText = id;
   document.getElementById("date").innerText = date;
