@@ -20,12 +20,33 @@ button.action {width:100%;padding:12px;background:#2563eb;color:white;border:non
 #certificate {
   display:none;
   border:3px solid #000;
-  padding:30px;
+  padding:25px;
   margin-top:20px;
   background:white;
+  font-size:14px;
 }
 
 footer {background:#0f172a;color:white;text-align:center;padding:10px;margin-top:30px;}
+
+/* ✅ PRINT FIX (ALREADY INCLUDED) */
+@media print {
+  body * { visibility: hidden; }
+
+  #certificate, #certificate * {
+    visibility: visible;
+  }
+
+  #certificate {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    font-size: 13px;
+  }
+
+  button { display: none; }
+}
 </style>
 </head>
 
@@ -82,42 +103,39 @@ footer {background:#0f172a;color:white;text-align:center;padding:10px;margin-top
 
 <div id="certificate">
 
-<!-- HEADER -->
 <div style="text-align:center;border-bottom:2px solid black;padding-bottom:10px;">
 <img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Logo_TV_2015.png" width="60">
 <h2>TechNova Solutions Pvt. Ltd.</h2>
 <p>Empowering Innovation Through Technology</p>
 </div>
 
-<h1 style="text-align:center;margin-top:20px;">INTERNSHIP CERTIFICATE</h1>
+<h2 style="text-align:center;margin-top:15px;">INTERNSHIP CERTIFICATE</h2>
 
-<p id="text" style="margin-top:20px;"></p>
+<p id="text"></p>
 
 <p>During the internship, the candidate contributed to real-time projects and collaborated effectively with the team.</p>
 <p>They demonstrated strong analytical and problem-solving skills.</p>
 <p>The candidate showed professionalism, discipline, and eagerness to learn.</p>
 <p>They successfully completed assigned tasks within deadlines.</p>
-<p>Their overall performance was excellent and appreciated.</p>
+<p>Their performance was excellent and appreciated.</p>
 <p>We wish them success in their future career.</p>
 
 <p><b>ID:</b> <span id="cid"></span></p>
 <p><b>Date:</b> <span id="date"></span></p>
 
-<!-- QR -->
 <div style="text-align:center;">
-<img id="qr" width="120">
+<img id="qr" width="100">
 <p>Scan to verify</p>
 </div>
 
-<!-- SIGNATURE + STAMP -->
-<div style="display:flex;justify-content:space-between;margin-top:30px;">
+<div style="display:flex;justify-content:space-between;margin-top:20px;">
 
 <div>
 <p><b>HR Manager</b></p>
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Signature_of_John_Hancock.svg" width="150">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Signature_of_John_Hancock.svg" width="120">
 </div>
 
-<div style="border:3px solid blue;border-radius:50%;width:100px;height:100px;display:flex;align-items:center;justify-content:center;">
+<div style="border:3px solid blue;border-radius:50%;width:90px;height:90px;display:flex;align-items:center;justify-content:center;">
 <b style="color:blue;">STAMP</b>
 </div>
 
@@ -131,10 +149,8 @@ footer {background:#0f172a;color:white;text-align:center;padding:10px;margin-top
 
 <div id="admin" class="card hidden">
 <h2>Admin Login</h2>
-
 <input id="user" placeholder="Username">
 <input id="pass" type="password" placeholder="Password">
-
 <button class="action" onclick="login()">Login</button>
 
 <div id="panel" class="hidden">
@@ -177,7 +193,6 @@ function generate(){
   document.getElementById("cid").innerText=id;
   document.getElementById("date").innerText=date;
 
-  // QR FIX (guaranteed)
   document.getElementById("qr").src =
   "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data="+id;
 
