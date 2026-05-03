@@ -29,21 +29,18 @@ button.action {width:100%;padding:12px;background:#2563eb;color:white;border:non
 /* PRINT FIX */
 @media print {
   body * { visibility: hidden; }
-
-  #certificate, #certificate * {
-    visibility: visible;
-  }
+  #certificate, #certificate * { visibility: visible; }
 
   #certificate {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    padding: 20px;
-    font-size: 13px;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    padding:20px;
+    font-size:13px;
   }
 
-  button { display: none; }
+  button { display:none; }
 }
 
 footer {background:#0f172a;color:white;text-align:center;padding:10px;margin-top:30px;}
@@ -103,11 +100,17 @@ footer {background:#0f172a;color:white;text-align:center;padding:10px;margin-top
 
 <div id="certificate">
 
-<!-- LOGO HEADER -->
+<!-- EMBEDDED LOGO (ALWAYS WORKS) -->
 <div style="text-align:center;border-bottom:2px solid black;padding-bottom:10px;">
-  <img src="logo.png" style="width:120px;">
-  <h2 style="margin:5px 0;">TechNova Solutions Pvt. Ltd.</h2>
-  <p style="margin:0;font-size:12px;">Empowering Innovation Through Technology</p>
+<img src="data:image/svg+xml;utf8,
+<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'>
+<circle cx='60' cy='60' r='50' fill='#2563eb'/>
+<text x='50%' y='55%' font-size='40' text-anchor='middle' fill='white' font-family='Arial'>T</text>
+</svg>
+" />
+
+<h2 style="margin:5px 0;">TechNova Solutions Pvt. Ltd.</h2>
+<p style="margin:0;font-size:12px;">Empowering Innovation Through Technology</p>
 </div>
 
 <h2 style="text-align:center;margin-top:15px;">INTERNSHIP CERTIFICATE</h2>
