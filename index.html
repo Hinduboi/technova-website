@@ -1,1 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TechNova Solutions</title>
+</head>
 
+<body>
+
+<header style="background:#1e2a38; color:white; padding:20px; text-align:center;">
+  <h1>TechNova Solutions Pvt. Ltd.</h1>
+  <p>Building Scalable Software Solutions</p>
+</header>
+
+<div style="padding:20px;">
+  <h2>Internship Letter Generator</h2>
+
+  <input id="name" placeholder="Your Name"><br><br>
+  <input id="role" placeholder="Role"><br><br>
+  <input id="duration" placeholder="Duration"><br><br>
+
+  <button onclick="generate()">Generate</button>
+
+  <pre id="output"></pre>
+</div>
+
+<script>
+function generate(){
+  let name = document.getElementById("name").value;
+  let role = document.getElementById("role").value;
+  let duration = document.getElementById("duration").value;
+
+  document.getElementById("output").innerText =
+`TO WHOM IT MAY CONCERN
+
+This is to certify that ${name} worked as ${role}
+from ${duration} at TechNova Solutions.
+
+HR Manager`;
+}
+</script>
+
+</body>
+</html>
