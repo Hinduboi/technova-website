@@ -43,6 +43,20 @@ button.action {width:100%;padding:12px;background:#2563eb;color:white;border:non
   button { display:none; }
 }
 
+.logoBox {
+  width:70px;
+  height:70px;
+  background:linear-gradient(135deg,#2563eb,#22c55e);
+  border-radius:15px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:auto;
+  color:white;
+  font-size:30px;
+  font-weight:bold;
+}
+
 footer {background:#0f172a;color:white;text-align:center;padding:10px;margin-top:30px;}
 </style>
 </head>
@@ -100,17 +114,11 @@ footer {background:#0f172a;color:white;text-align:center;padding:10px;margin-top
 
 <div id="certificate">
 
-<!-- EMBEDDED LOGO (ALWAYS WORKS) -->
+<!-- LOGO (NO IMAGE, NEVER BREAKS) -->
 <div style="text-align:center;border-bottom:2px solid black;padding-bottom:10px;">
-<img src="data:image/svg+xml;utf8,
-<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'>
-<circle cx='60' cy='60' r='50' fill='#2563eb'/>
-<text x='50%' y='55%' font-size='40' text-anchor='middle' fill='white' font-family='Arial'>T</text>
-</svg>
-" />
-
-<h2 style="margin:5px 0;">TechNova Solutions Pvt. Ltd.</h2>
-<p style="margin:0;font-size:12px;">Empowering Innovation Through Technology</p>
+  <div class="logoBox">T</div>
+  <h2 style="margin:5px 0;">TechNova Solutions Pvt. Ltd.</h2>
+  <p style="margin:0;font-size:12px;">Empowering Innovation Through Technology</p>
 </div>
 
 <h2 style="text-align:center;margin-top:15px;">INTERNSHIP CERTIFICATE</h2>
