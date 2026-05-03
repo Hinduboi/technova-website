@@ -1,41 +1,159 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>TechNova Solutions</title>
+<meta charset="UTF-8">
+<title>TechNova Solutions</title>
+
+<style>
+body {
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#f1f5f9;
+}
+
+header {
+  background:#0f172a;
+  color:white;
+  padding:20px;
+  text-align:center;
+}
+
+nav {
+  background:#1e293b;
+  padding:10px;
+  text-align:center;
+}
+
+nav a {
+  color:white;
+  margin:10px;
+  text-decoration:none;
+}
+
+.container {
+  padding:20px;
+  max-width:900px;
+  margin:auto;
+}
+
+.card {
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  margin-top:20px;
+}
+
+input {
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+}
+
+button {
+  padding:12px;
+  width:100%;
+  background:#2563eb;
+  color:white;
+  border:none;
+  cursor:pointer;
+  font-size:16px;
+}
+
+button:hover {
+  background:#1d4ed8;
+}
+
+#certificate {
+  margin-top:20px;
+  padding:30px;
+  border:2px solid #000;
+  background:white;
+  display:none;
+}
+
+.title {
+  text-align:center;
+  font-size:24px;
+  font-weight:bold;
+}
+
+.center {
+  text-align:center;
+}
+
+.signature {
+  margin-top:40px;
+}
+</style>
 </head>
 
 <body>
 
-<header style="background:#1e2a38; color:white; padding:20px; text-align:center;">
+<header>
   <h1>TechNova Solutions Pvt. Ltd.</h1>
-  <p>Building Scalable Software Solutions</p>
+  <p>Innovating the Future of Software</p>
 </header>
 
-<div style="padding:20px;">
-  <h2>Internship Letter Generator</h2>
+<nav>
+  <a href="#">Home</a>
+  <a href="#">Services</a>
+  <a href="#">Careers</a>
+</nav>
 
-  <input id="name" placeholder="Your Name"><br><br>
-  <input id="role" placeholder="Role"><br><br>
-  <input id="duration" placeholder="Duration"><br><br>
+<div class="container">
 
-  <button onclick="generate()">Generate</button>
+<div class="card">
+<h2>Internship Certificate Generator</h2>
 
-  <pre id="output"></pre>
+<input id="name" placeholder="Enter Student Name">
+<input id="role" placeholder="Enter Role (Web Developer Intern)">
+<input id="duration" placeholder="Duration (Jan 2025 - Mar 2025)">
+
+<button onclick="generate()">Generate Certificate</button>
+<button onclick="downloadPDF()">Download as PDF</button>
+</div>
+
+<div id="certificate">
+  <div class="title">INTERNSHIP CERTIFICATE</div>
+
+  <p id="certText"></p>
+
+  <p class="center"><b>Certificate ID:</b> <span id="certID"></span></p>
+  <p class="center"><b>Date:</b> <span id="date"></span></p>
+
+  <div class="signature">
+    <p>Sincerely,</p>
+    <p><b>HR Manager</b></p>
+    <p>TechNova Solutions Pvt. Ltd.</p>
+  </div>
+</div>
+
 </div>
 
 <script>
-function generate(){
+function generate() {
   let name = document.getElementById("name").value;
   let role = document.getElementById("role").value;
   let duration = document.getElementById("duration").value;
 
-  document.getElementById("output").innerText =
-`TO WHOM IT MAY CONCERN
+  let today = new Date().toLocaleDateString();
+  let id = "TN-" + Math.floor(Math.random()*100000);
 
-This is to certify that ${name} worked as ${role}
-from ${duration} at TechNova Solutions.
+  document.getElementById("certText").innerText =
+  "This is to certify that " + name +
+  " has successfully completed an internship as a " + role +
+  " at TechNova Solutions Pvt. Ltd. during the period of " + duration +
+  ". The candidate demonstrated excellent skills and professionalism.";
 
-HR Manager`;
+  document.getElementById("certID").innerText = id;
+  document.getElementById("date").innerText = today;
+
+  document.getElementById("certificate").style.display = "block";
+}
+
+function downloadPDF() {
+  window.print();
 }
 </script>
 
