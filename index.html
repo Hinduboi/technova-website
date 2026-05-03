@@ -6,79 +6,16 @@
 
 <style>
 body {margin:0;font-family:'Segoe UI',sans-serif;background:#eef2f7;}
-
-header {
-  background:#0f172a;
-  color:white;
-  padding:25px;
-  text-align:center;
-}
-
-nav {
-  background:#1e293b;
-  padding:10px;
-  text-align:center;
-}
-
-nav button {
-  margin:5px;
-  padding:10px 18px;
-  border:none;
-  background:#3b82f6;
-  color:white;
-  cursor:pointer;
-  border-radius:5px;
-}
-
-.container {
-  max-width:1000px;
-  margin:auto;
-  padding:20px;
-}
-
-.card {
-  background:white;
-  padding:25px;
-  margin-top:20px;
-  border-radius:12px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
-}
-
+header {background:#0f172a;color:white;padding:25px;text-align:center;}
+nav {background:#1e293b;padding:10px;text-align:center;}
+nav button {margin:5px;padding:10px 18px;border:none;background:#3b82f6;color:white;cursor:pointer;border-radius:5px;}
+.container {max-width:1000px;margin:auto;padding:20px;}
+.card {background:white;padding:25px;margin-top:20px;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
 .hidden {display:none;}
-
-input {
-  width:100%;
-  padding:12px;
-  margin:10px 0;
-  border-radius:6px;
-  border:1px solid #ccc;
-}
-
-button.action {
-  width:100%;
-  padding:14px;
-  background:#2563eb;
-  color:white;
-  border:none;
-  font-size:16px;
-  border-radius:6px;
-}
-
-#certificate {
-  display:none;
-  border:3px solid #111;
-  padding:30px;
-  margin-top:20px;
-  background:white;
-}
-
-footer {
-  background:#0f172a;
-  color:white;
-  text-align:center;
-  padding:15px;
-  margin-top:30px;
-}
+input {width:100%;padding:12px;margin:10px 0;border-radius:6px;border:1px solid #ccc;}
+button.action {width:100%;padding:14px;background:#2563eb;color:white;border:none;font-size:16px;border-radius:6px;}
+#certificate {display:none;border:3px solid #111;padding:30px;margin-top:20px;background:white;}
+footer {background:#0f172a;color:white;text-align:center;padding:15px;margin-top:30px;}
 </style>
 </head>
 
@@ -86,63 +23,26 @@ footer {
 
 <header>
 <h1>TechNova Solutions Pvt. Ltd.</h1>
-<p>Building Scalable Software & Digital Innovation</p>
+<p>Software Company & Certificate Management System</p>
 </header>
 
 <nav>
 <button onclick="show('home')">Home</button>
-<button onclick="show('services')">Services</button>
-<button onclick="show('projects')">Projects</button>
 <button onclick="show('product')">Products</button>
-<button onclick="show('contact')">Contact</button>
+<button onclick="show('admin')">Admin</button>
 </nav>
 
 <div class="container">
 
 <!-- HOME -->
 <div id="home" class="card">
-<h2>Welcome to TechNova</h2>
-<p>TechNova Solutions Pvt. Ltd. is a forward-thinking software company delivering cutting-edge digital solutions, web applications, and automation systems.</p>
-
-<h3>Why Choose Us?</h3>
-<ul>
-<li>Industry-relevant solutions</li>
-<li>Scalable architecture</li>
-<li>Fast development cycles</li>
-</ul>
-</div>
-
-<!-- SERVICES -->
-<div id="services" class="card hidden">
-<h2>Our Services</h2>
-<ul>
-<li>Full Stack Web Development</li>
-<li>Mobile App Development</li>
-<li>Automation Systems</li>
-<li>Custom Software Solutions</li>
-</ul>
-</div>
-
-<!-- PROJECTS -->
-<div id="projects" class="card hidden">
-<h2>Projects</h2>
-<ul>
-<li>Business Automation Dashboard</li>
-<li>Portfolio Platforms</li>
-<li>Certificate Management System</li>
-</ul>
+<h2>Welcome</h2>
+<p>TechNova Solutions builds scalable digital products and internal management systems for businesses and learners.</p>
 </div>
 
 <!-- PRODUCT -->
 <div id="product" class="card hidden">
-<h2>Our Product</h2>
-<p>This internal Certificate Management System is used to generate professional internship certificates.</p>
-
-<button onclick="showGenerator()">Launch System</button>
-
-<div id="generator" class="hidden">
-
-<h3>Internship Certificate Generator</h3>
+<h2>Certificate Generator</h2>
 
 <input id="name" placeholder="Student Name">
 <input id="role" placeholder="Role">
@@ -156,68 +56,52 @@ footer {
 
 <p id="text"></p>
 
-<p>
-During the internship period, the candidate actively participated in real-time project development and collaborated effectively with team members.
-</p>
+<p>During the internship, the candidate actively contributed to live projects and collaborated effectively with team members.</p>
 
-<p>
-They demonstrated strong analytical thinking, problem-solving skills, and the ability to adapt to new technologies quickly.
-</p>
+<p>They demonstrated strong analytical thinking, problem-solving skills, and adaptability to new technologies.</p>
 
-<p>
-The candidate showed dedication, discipline, and a strong commitment to learning and professional growth.
-</p>
+<p>The candidate consistently completed tasks within deadlines while maintaining high-quality standards.</p>
 
-<p>
-They successfully completed assigned tasks within deadlines and maintained high-quality standards in their work.
-</p>
+<p>They showed dedication, professionalism, and a strong willingness to learn and grow.</p>
 
-<p>
-Their overall performance was excellent, and they proved to be a valuable contributor to the organization.
-</p>
+<p>Their overall performance was excellent, and they proved to be a valuable contributor to the team.</p>
 
-<p>
-We highly recommend them for future professional opportunities and wish them continued success in their career.
-</p>
+<p>We highly recommend them for future professional opportunities and wish them continued success.</p>
 
-<p><b>Certificate ID:</b> <span id="cid"></span></p>
+<p><b>ID:</b> <span id="cid"></span></p>
 <p><b>Date:</b> <span id="date"></span></p>
 
-<br>
-<button onclick="downloadPDF()">Download Certificate (PDF)</button>
-
-<p style="margin-top:30px;">
-Sincerely,<br>
-<b>HR Manager</b><br>
-TechNova Solutions Pvt. Ltd.
-</p>
+<button onclick="downloadPDF()">Download PDF</button>
 
 </div>
 </div>
+
+<!-- ADMIN -->
+<div id="admin" class="card hidden">
+<h2>Admin Login</h2>
+
+<input id="user" placeholder="Username">
+<input id="pass" type="password" placeholder="Password">
+
+<button class="action" onclick="login()">Login</button>
+
+<div id="panel" class="hidden">
+<h3>Saved Certificates</h3>
+<ul id="list"></ul>
 </div>
 
-<!-- CONTACT -->
-<div id="contact" class="card hidden">
-<h2>Contact Us</h2>
-<p>Email: technova@email.com</p>
-<p>Location: India</p>
 </div>
 
 </div>
 
-<footer>
-<p>© 2026 TechNova Solutions Pvt. Ltd.</p>
-</footer>
+<footer>© 2026 TechNova Solutions</footer>
 
 <script>
-function show(section){
-  let sections=["home","services","projects","product","contact"];
-  sections.forEach(s=>document.getElementById(s).classList.add("hidden"));
-  document.getElementById(section).classList.remove("hidden");
-}
+let db = JSON.parse(localStorage.getItem("certs") || "{}");
 
-function showGenerator(){
-  document.getElementById("generator").classList.remove("hidden");
+function show(section){
+  document.querySelectorAll('.card').forEach(el=>el.classList.add("hidden"));
+  document.getElementById(section).classList.remove("hidden");
 }
 
 function generate(){
@@ -227,6 +111,9 @@ function generate(){
 
   let id="TN"+Math.floor(Math.random()*100000);
   let date=new Date().toLocaleDateString();
+
+  db[id]={name,role,duration,date};
+  localStorage.setItem("certs",JSON.stringify(db));
 
   document.getElementById("text").innerText=
   "This is to certify that "+name+
@@ -241,6 +128,28 @@ function generate(){
 
 function downloadPDF(){
   window.print();
+}
+
+function login(){
+  let u=document.getElementById("user").value;
+  let p=document.getElementById("pass").value;
+
+  if(u==="admin" && p==="1234"){
+    document.getElementById("panel").classList.remove("hidden");
+    load();
+  } else {
+    alert("Wrong login");
+  }
+}
+
+function load(){
+  let list=document.getElementById("list");
+  list.innerHTML="";
+  for(let id in db){
+    let li=document.createElement("li");
+    li.innerText=id+" - "+db[id].name;
+    list.appendChild(li);
+  }
 }
 </script>
 
