@@ -7,8 +7,8 @@
 <style>
 body {
   margin:0;
-  font-family: 'Segoe UI', sans-serif;
-  background:#f8fafc;
+  font-family: Arial;
+  background:#f4f6f9;
 }
 
 header {
@@ -20,18 +20,17 @@ header {
 
 nav {
   background:#1e293b;
-  padding:12px;
+  padding:10px;
   text-align:center;
 }
 
 nav button {
   margin:5px;
-  padding:10px 15px;
+  padding:10px;
   border:none;
-  cursor:pointer;
   background:#2563eb;
   color:white;
-  border-radius:5px;
+  cursor:pointer;
 }
 
 .container {
@@ -43,9 +42,8 @@ nav button {
 .card {
   background:white;
   padding:20px;
-  border-radius:10px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.1);
   margin-top:20px;
+  border-radius:10px;
 }
 
 input {
@@ -60,42 +58,52 @@ button.action {
   background:#2563eb;
   color:white;
   border:none;
-  cursor:pointer;
-  font-size:16px;
+}
+
+.hidden {
+  display:none;
 }
 
 #certificate {
   display:none;
   margin-top:20px;
-  padding:30px;
+  padding:20px;
   border:2px solid black;
-  background:white;
 }
-
-.center { text-align:center; }
-.title { font-size:22px; font-weight:bold; text-align:center; }
-
-.hidden { display:none; }
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>TechNova Solutions Pvt. Ltd.</h1>
-  <p>Professional Certificate Management System</p>
+<h1>TechNova Solutions Pvt. Ltd.</h1>
+<p>Software Company & Certificate System</p>
 </header>
 
 <nav>
-  <button onclick="showSection('gen')">Generate</button>
-  <button onclick="showSection('verify')">Verify</button>
+<button onclick="show('home')">Home</button>
+<button onclick="show('generator')">Generator</button>
+<button onclick="show('verify')">Verify</button>
 </nav>
 
 <div class="container">
 
+<!-- HOME -->
+<div id="home" class="card">
+<h2>About Company</h2>
+<p>TechNova Solutions is a software company building web apps and automation tools.</p>
+
+<h3>Services</h3>
+<ul>
+<li>Web Development</li>
+<li>App Development</li>
+<li>Automation Tools</li>
+</ul>
+</div>
+
 <!-- GENERATOR -->
-<div id="gen" class="card">
-<h2>Create Certificate</h2>
+<div id="generator" class="card hidden">
+<h2>Internship Certificate Generator</h2>
 
 <input id="name" placeholder="Student Name">
 <input id="role" placeholder="Role">
@@ -104,17 +112,16 @@ button.action {
 <button class="action" onclick="generate()">Generate Certificate</button>
 
 <div id="certificate">
-  <div class="title">INTERNSHIP CERTIFICATE</div>
-  <p id="certText"></p>
+<h3>INTERNSHIP CERTIFICATE</h3>
 
-  <p class="center"><b>ID:</b> <span id="certID"></span></p>
-  <p class="center"><b>Date:</b> <span id="date"></span></p>
+<p id="text"></p>
 
-  <div class="center">
-    <img id="qr" width="120">
-  </div>
+<p><b>ID:</b> <span id="cid"></span></p>
+<p><b>Date:</b> <span id="date"></span></p>
 
-  <p>Sincerely,<br><b>HR Manager</b></p>
+<img id="qr" width="120">
+
+<p>Sincerely,<br>HR Manager</p>
 </div>
 </div>
 
@@ -122,7 +129,7 @@ button.action {
 <div id="verify" class="card hidden">
 <h2>Verify Certificate</h2>
 
-<input id="verifyID" placeholder="Enter Certificate ID">
+<input id="vid" placeholder="Enter Certificate ID">
 <button class="action" onclick="verify()">Verify</button>
 
 <p id="result"></p>
@@ -131,11 +138,13 @@ button.action {
 </div>
 
 <script>
-let db = JSON.parse(localStorage.getItem("certDB") || "{}");
+let db = JSON.parse(localStorage.getItem("db") || "{}");
 
-function showSection(section) {
-  document.getElementById("gen").classList.add("hidden");
+function show(section) {
+  document.getElementById("home").classList.add("hidden");
+  document.getElementById("generator").classList.add("hidden");
   document.getElementById("verify").classList.add("hidden");
+
   document.getElementById(section).classList.remove("hidden");
 }
 
@@ -144,34 +153,33 @@ function generate() {
   let role = document.getElementById("role").value;
   let duration = document.getElementById("duration").value;
 
-  let id = "TN-" + Math.floor(Math.random()*100000);
+  let id = "TN" + Math.floor(Math.random()*100000);
   let date = new Date().toLocaleDateString();
 
-  let text = name + " completed internship as " + role + " during " + duration;
+  db[id] = {name, role};
+  localStorage.setItem("db", JSON.stringify(db));
 
-  db[id] = {name, role, duration, date};
-  localStorage.setItem("certDB", JSON.stringify(db));
+  document.getElementById("text").innerText =
+  name + " worked as " + role + " during " + duration;
 
-  document.getElementById("certText").innerText = text;
-  document.getElementById("certID").innerText = id;
+  document.getElementById("cid").innerText = id;
   document.getElementById("date").innerText = date;
 
-  let url = window.location.href + "?id=" + id;
   document.getElementById("qr").src =
-    "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=" + url;
+  "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=" + id;
 
   document.getElementById("certificate").style.display = "block";
 }
 
 function verify() {
-  let id = document.getElementById("verifyID").value;
+  let id = document.getElementById("vid").value;
 
   if(db[id]) {
     document.getElementById("result").innerText =
-      "Valid Certificate: " + db[id].name;
+    "Valid Certificate for " + db[id].name;
   } else {
     document.getElementById("result").innerText =
-      "Invalid Certificate ❌";
+    "Invalid Certificate";
   }
 }
 </script>
