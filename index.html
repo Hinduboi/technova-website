@@ -5,21 +5,17 @@
 <title>TechNova Solutions</title>
 
 <style>
-body {
-  margin:0;
-  font-family: 'Segoe UI', sans-serif;
-  background:#eef2f7;
-}
+body {margin:0;font-family:'Segoe UI',sans-serif;background:#eef2f7;}
 
 header {
-  background:linear-gradient(90deg,#0f172a,#1e293b);
+  background:#0f172a;
   color:white;
   padding:25px;
   text-align:center;
 }
 
 nav {
-  background:#111827;
+  background:#1e293b;
   padding:10px;
   text-align:center;
 }
@@ -89,7 +85,6 @@ footer {
 <body>
 
 <header>
-<img src="https://cdn-icons-png.flaticon.com/512/2721/2721297.png" width="70">
 <h1>TechNova Solutions Pvt. Ltd.</h1>
 <p>Building Scalable Software & Digital Innovation</p>
 </header>
@@ -112,11 +107,9 @@ footer {
 <h3>Why Choose Us?</h3>
 <ul>
 <li>Industry-relevant solutions</li>
-<li>Scalable and modern architecture</li>
-<li>Fast and efficient delivery</li>
+<li>Scalable architecture</li>
+<li>Fast development cycles</li>
 </ul>
-
-<p><b>Trusted by startups and learners across India.</b></p>
 </div>
 
 <!-- SERVICES -->
@@ -125,7 +118,7 @@ footer {
 <ul>
 <li>Full Stack Web Development</li>
 <li>Mobile App Development</li>
-<li>AI & Automation Tools</li>
+<li>Automation Systems</li>
 <li>Custom Software Solutions</li>
 </ul>
 </div>
@@ -135,7 +128,7 @@ footer {
 <h2>Projects</h2>
 <ul>
 <li>Business Automation Dashboard</li>
-<li>Portfolio & Resume Platforms</li>
+<li>Portfolio Platforms</li>
 <li>Certificate Management System</li>
 </ul>
 </div>
@@ -143,17 +136,17 @@ footer {
 <!-- PRODUCT -->
 <div id="product" class="card hidden">
 <h2>Our Product</h2>
-<p>Our internal Certificate Management System helps organizations generate, manage, and verify internship certificates efficiently.</p>
+<p>This internal Certificate Management System is used to generate professional internship certificates.</p>
 
 <button onclick="showGenerator()">Launch System</button>
 
 <div id="generator" class="hidden">
 
-<h3>Certificate Generator</h3>
+<h3>Internship Certificate Generator</h3>
 
 <input id="name" placeholder="Student Name">
-<input id="role" placeholder="Role (e.g., Web Developer Intern)">
-<input id="duration" placeholder="Duration (Jan 2025 - Mar 2025)">
+<input id="role" placeholder="Role">
+<input id="duration" placeholder="Duration">
 
 <button class="action" onclick="generate()">Generate Certificate</button>
 
@@ -164,23 +157,33 @@ footer {
 <p id="text"></p>
 
 <p>
-During the internship period, the candidate was actively involved in real-time project development, collaborated with the team, and demonstrated strong problem-solving skills and professionalism.
+During the internship period, the candidate actively participated in real-time project development and collaborated effectively with team members.
 </p>
 
 <p>
-We found the candidate to be sincere, hardworking, and eager to learn new technologies. Their performance was commendable throughout the internship duration.
+They demonstrated strong analytical thinking, problem-solving skills, and the ability to adapt to new technologies quickly.
 </p>
 
 <p>
-We wish them success in all future professional endeavors.
+The candidate showed dedication, discipline, and a strong commitment to learning and professional growth.
+</p>
+
+<p>
+They successfully completed assigned tasks within deadlines and maintained high-quality standards in their work.
+</p>
+
+<p>
+Their overall performance was excellent, and they proved to be a valuable contributor to the organization.
+</p>
+
+<p>
+We highly recommend them for future professional opportunities and wish them continued success in their career.
 </p>
 
 <p><b>Certificate ID:</b> <span id="cid"></span></p>
 <p><b>Date:</b> <span id="date"></span></p>
 
-<img id="qr" width="120">
-
-<br><br>
+<br>
 <button onclick="downloadPDF()">Download Certificate (PDF)</button>
 
 <p style="margin-top:30px;">
@@ -197,7 +200,7 @@ TechNova Solutions Pvt. Ltd.
 <div id="contact" class="card hidden">
 <h2>Contact Us</h2>
 <p>Email: technova@email.com</p>
-<p>Location: New Delhi, India</p>
+<p>Location: India</p>
 </div>
 
 </div>
@@ -207,52 +210,37 @@ TechNova Solutions Pvt. Ltd.
 </footer>
 
 <script>
-let db = JSON.parse(localStorage.getItem("db") || "{}");
-
-function show(section) {
-  let sections = ["home","services","projects","product","contact"];
-  sections.forEach(s => document.getElementById(s).classList.add("hidden"));
+function show(section){
+  let sections=["home","services","projects","product","contact"];
+  sections.forEach(s=>document.getElementById(s).classList.add("hidden"));
   document.getElementById(section).classList.remove("hidden");
 }
 
-function showGenerator() {
+function showGenerator(){
   document.getElementById("generator").classList.remove("hidden");
 }
 
-function generate() {
-  let name = document.getElementById("name").value;
-  let role = document.getElementById("role").value;
-  let duration = document.getElementById("duration").value;
+function generate(){
+  let name=document.getElementById("name").value;
+  let role=document.getElementById("role").value;
+  let duration=document.getElementById("duration").value;
 
-  let id = "TN" + Math.floor(Math.random()*100000);
-  let date = new Date().toLocaleDateString();
+  let id="TN"+Math.floor(Math.random()*100000);
+  let date=new Date().toLocaleDateString();
 
-  db[id] = {name};
-  localStorage.setItem("db", JSON.stringify(db));
+  document.getElementById("text").innerText=
+  "This is to certify that "+name+
+  " has successfully completed an internship as "+role+
+  " at TechNova Solutions Pvt. Ltd. during the period of "+duration+".";
 
-  document.getElementById("text").innerText =
-  "This is to certify that " + name +
-  " has successfully completed an internship as a " + role +
-  " at TechNova Solutions Pvt. Ltd. during the period of " + duration + ".";
+  document.getElementById("cid").innerText=id;
+  document.getElementById("date").innerText=date;
 
-  document.getElementById("cid").innerText = id;
-  document.getElementById("date").innerText = date;
-
-  document.getElementById("qr").src =
-  "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=" + id;
-
-  document.getElementById("certificate").style.display = "block";
+  document.getElementById("certificate").style.display="block";
 }
 
-function downloadPDF() {
-  let content = document.getElementById("certificate").innerHTML;
-
-  let win = window.open('', '', 'height=700,width=700');
-  win.document.write('<html><head><title>Certificate</title></head><body>');
-  win.document.write(content);
-  win.document.write('</body></html>');
-  win.document.close();
-  win.print();
+function downloadPDF(){
+  window.print();
 }
 </script>
 
