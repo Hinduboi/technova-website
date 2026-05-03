@@ -5,7 +5,7 @@
 <title>TechNova Solutions</title>
 
 <style>
-body {margin:0;font-family:'Segoe UI',sans-serif;background:#eef2f7;}
+body {margin:0;font-family:Arial;background:#eef2f7;}
 header {background:#0f172a;color:white;padding:20px;text-align:center;}
 nav {background:#1e293b;text-align:center;padding:10px;}
 nav button {margin:5px;padding:10px;background:#2563eb;color:white;border:none;}
@@ -47,34 +47,30 @@ footer {background:#0f172a;color:white;text-align:center;padding:10px;margin-top
 
 <div class="container">
 
-<!-- HOME -->
 <div id="home" class="card">
 <h2>About Us</h2>
-<p>TechNova Solutions Pvt. Ltd. is a modern software company specializing in scalable web applications, automation tools, and digital solutions.</p>
+<p>TechNova Solutions builds scalable digital products and automation systems.</p>
 </div>
 
-<!-- SERVICES -->
 <div id="services" class="card hidden">
-<h2>Our Services</h2>
+<h2>Services</h2>
 <ul>
 <li>Web Development</li>
-<li>Mobile App Development</li>
-<li>Automation Systems</li>
+<li>App Development</li>
+<li>Automation</li>
 <li>AI Tools</li>
 </ul>
 </div>
 
-<!-- PROJECTS -->
 <div id="projects" class="card hidden">
 <h2>Projects</h2>
 <ul>
-<li>Business Dashboard Systems</li>
+<li>Dashboard Systems</li>
 <li>Portfolio Platforms</li>
-<li>Certificate Management System</li>
+<li>Certificate System</li>
 </ul>
 </div>
 
-<!-- PRODUCT -->
 <div id="product" class="card hidden">
 <h2>Certificate Generator</h2>
 
@@ -86,67 +82,53 @@ footer {background:#0f172a;color:white;text-align:center;padding:10px;margin-top
 
 <div id="certificate">
 
-<!-- PREMIUM CERTIFICATE -->
-
-<div style="text-align:center; border-bottom:2px solid #000; padding-bottom:10px;">
-<img src="https://cdn-icons-png.flaticon.com/512/2721/2721297.png" width="60">
+<!-- HEADER -->
+<div style="text-align:center;border-bottom:2px solid black;padding-bottom:10px;">
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Logo_TV_2015.png" width="60">
 <h2>TechNova Solutions Pvt. Ltd.</h2>
 <p>Empowering Innovation Through Technology</p>
 </div>
 
-<h1 style="text-align:center; margin-top:20px; letter-spacing:2px;">
-INTERNSHIP CERTIFICATE
-</h1>
+<h1 style="text-align:center;margin-top:20px;">INTERNSHIP CERTIFICATE</h1>
 
-<p id="text" style="margin-top:30px; font-size:16px; line-height:1.6;"></p>
+<p id="text" style="margin-top:20px;"></p>
 
-<p>During the internship period, the candidate was actively involved in real-time project development and contributed effectively to team objectives.</p>
+<p>During the internship, the candidate contributed to real-time projects and collaborated effectively with the team.</p>
+<p>They demonstrated strong analytical and problem-solving skills.</p>
+<p>The candidate showed professionalism, discipline, and eagerness to learn.</p>
+<p>They successfully completed assigned tasks within deadlines.</p>
+<p>Their overall performance was excellent and appreciated.</p>
+<p>We wish them success in their future career.</p>
 
-<p>They demonstrated strong analytical thinking, problem-solving ability, and a proactive approach toward learning new technologies.</p>
-
-<p>The candidate maintained professionalism, punctuality, and consistently delivered high-quality work.</p>
-
-<p>They exhibited excellent teamwork, communication skills, and adaptability in a dynamic work environment.</p>
-
-<p>Their overall performance was outstanding and highly appreciated by the organization.</p>
-
-<p>We confidently recommend them for future professional opportunities and wish them great success ahead.</p>
-
-<p><b>Certificate ID:</b> <span id="cid"></span></p>
+<p><b>ID:</b> <span id="cid"></span></p>
 <p><b>Date:</b> <span id="date"></span></p>
 
-<div style="display:flex; justify-content:space-between; margin-top:40px; align-items:center;">
+<!-- QR -->
+<div style="text-align:center;">
+<img id="qr" width="120">
+<p>Scan to verify</p>
+</div>
+
+<!-- SIGNATURE + STAMP -->
+<div style="display:flex;justify-content:space-between;margin-top:30px;">
 
 <div>
 <p><b>HR Manager</b></p>
 <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Signature_of_John_Hancock.svg" width="150">
 </div>
 
-<div style="text-align:center;">
-<img id="qr" width="100"><br>
-<small>Scan for verification</small>
-</div>
-
-<div style="text-align:center;">
-<div style="border:3px solid #2563eb; border-radius:50%; width:100px; height:100px; display:flex; align-items:center; justify-content:center;">
-<b style="color:#2563eb;">STAMP</b>
-</div>
+<div style="border:3px solid blue;border-radius:50%;width:100px;height:100px;display:flex;align-items:center;justify-content:center;">
+<b style="color:blue;">STAMP</b>
 </div>
 
 </div>
 
-<br><br>
-
-<div style="text-align:center;">
-<button onclick="downloadPDF()" style="padding:12px 20px; background:#2563eb; color:white; border:none;">
-Download Certificate (PDF)
-</button>
-</div>
+<br>
+<button onclick="downloadPDF()">Download Certificate</button>
 
 </div>
 </div>
 
-<!-- ADMIN -->
 <div id="admin" class="card hidden">
 <h2>Admin Login</h2>
 
@@ -156,16 +138,13 @@ Download Certificate (PDF)
 <button class="action" onclick="login()">Login</button>
 
 <div id="panel" class="hidden">
-<h3>Certificates</h3>
 <ul id="list"></ul>
 </div>
 </div>
 
-<!-- CONTACT -->
 <div id="contact" class="card hidden">
 <h2>Contact</h2>
 <p>Email: technova@email.com</p>
-<p>Location: India</p>
 </div>
 
 </div>
@@ -191,14 +170,14 @@ function generate(){
   db[id]={name};
   localStorage.setItem("certs",JSON.stringify(db));
 
-  document.getElementById("text").innerText=
-  "This is to certify that "+name+
-  " has successfully completed an internship as "+role+
-  " at TechNova Solutions Pvt. Ltd. during the period of "+duration+".";
+  document.getElementById("text").innerText =
+  "This is to certify that "+name+" has completed an internship as "+role+
+  " at TechNova Solutions during "+duration+".";
 
   document.getElementById("cid").innerText=id;
   document.getElementById("date").innerText=date;
 
+  // QR FIX (guaranteed)
   document.getElementById("qr").src =
   "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data="+id;
 
