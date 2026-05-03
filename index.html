@@ -1,21 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>TechNova Solutions</title>
 
 <style>
 body {margin:0;font-family:'Segoe UI',sans-serif;background:#eef2f7;}
-header {background:#0f172a;color:white;padding:25px;text-align:center;}
-nav {background:#1e293b;padding:10px;text-align:center;}
-nav button {margin:5px;padding:10px 18px;border:none;background:#3b82f6;color:white;cursor:pointer;border-radius:5px;}
-.container {max-width:1000px;margin:auto;padding:20px;}
-.card {background:white;padding:25px;margin-top:20px;border-radius:12px;box-shadow:0 5px 15px rgba(0,0,0,0.1);}
+header {background:#0f172a;color:white;padding:20px;text-align:center;}
+nav {background:#1e293b;text-align:center;padding:10px;}
+nav button {margin:5px;padding:10px;background:#2563eb;color:white;border:none;}
+
+.container {padding:20px;max-width:1000px;margin:auto;}
+.card {background:white;padding:20px;margin-top:20px;border-radius:10px;}
 .hidden {display:none;}
-input {width:100%;padding:12px;margin:10px 0;border-radius:6px;border:1px solid #ccc;}
-button.action {width:100%;padding:14px;background:#2563eb;color:white;border:none;font-size:16px;border-radius:6px;}
-#certificate {display:none;border:3px solid #111;padding:30px;margin-top:20px;background:white;}
-footer {background:#0f172a;color:white;text-align:center;padding:15px;margin-top:30px;}
+
+input {width:100%;padding:10px;margin:10px 0;}
+button.action {width:100%;padding:12px;background:#2563eb;color:white;border:none;}
+
+#certificate {
+  display:none;
+  border:3px solid #000;
+  padding:30px;
+  margin-top:20px;
+  background:white;
+}
+
+footer {background:#0f172a;color:white;text-align:center;padding:10px;margin-top:30px;}
 </style>
 </head>
 
@@ -23,21 +33,45 @@ footer {background:#0f172a;color:white;text-align:center;padding:15px;margin-top
 
 <header>
 <h1>TechNova Solutions Pvt. Ltd.</h1>
-<p>Software Company & Certificate Management System</p>
+<p>Software Company & Digital Solutions</p>
 </header>
 
 <nav>
 <button onclick="show('home')">Home</button>
+<button onclick="show('services')">Services</button>
+<button onclick="show('projects')">Projects</button>
 <button onclick="show('product')">Products</button>
 <button onclick="show('admin')">Admin</button>
+<button onclick="show('contact')">Contact</button>
 </nav>
 
 <div class="container">
 
 <!-- HOME -->
 <div id="home" class="card">
-<h2>Welcome</h2>
-<p>TechNova Solutions builds scalable digital products and internal management systems for businesses and learners.</p>
+<h2>About Us</h2>
+<p>TechNova Solutions Pvt. Ltd. is a modern software company specializing in scalable web applications, automation tools, and digital solutions.</p>
+</div>
+
+<!-- SERVICES -->
+<div id="services" class="card hidden">
+<h2>Our Services</h2>
+<ul>
+<li>Web Development</li>
+<li>Mobile App Development</li>
+<li>Automation Systems</li>
+<li>AI Tools</li>
+</ul>
+</div>
+
+<!-- PROJECTS -->
+<div id="projects" class="card hidden">
+<h2>Projects</h2>
+<ul>
+<li>Business Dashboard Systems</li>
+<li>Portfolio Platforms</li>
+<li>Certificate Management System</li>
+</ul>
 </div>
 
 <!-- PRODUCT -->
@@ -52,26 +86,62 @@ footer {background:#0f172a;color:white;text-align:center;padding:15px;margin-top
 
 <div id="certificate">
 
-<h2 style="text-align:center;">INTERNSHIP CERTIFICATE</h2>
+<!-- PREMIUM CERTIFICATE -->
 
-<p id="text"></p>
+<div style="text-align:center; border-bottom:2px solid #000; padding-bottom:10px;">
+<img src="https://cdn-icons-png.flaticon.com/512/2721/2721297.png" width="60">
+<h2>TechNova Solutions Pvt. Ltd.</h2>
+<p>Empowering Innovation Through Technology</p>
+</div>
 
-<p>During the internship, the candidate actively contributed to live projects and collaborated effectively with team members.</p>
+<h1 style="text-align:center; margin-top:20px; letter-spacing:2px;">
+INTERNSHIP CERTIFICATE
+</h1>
 
-<p>They demonstrated strong analytical thinking, problem-solving skills, and adaptability to new technologies.</p>
+<p id="text" style="margin-top:30px; font-size:16px; line-height:1.6;"></p>
 
-<p>The candidate consistently completed tasks within deadlines while maintaining high-quality standards.</p>
+<p>During the internship period, the candidate was actively involved in real-time project development and contributed effectively to team objectives.</p>
 
-<p>They showed dedication, professionalism, and a strong willingness to learn and grow.</p>
+<p>They demonstrated strong analytical thinking, problem-solving ability, and a proactive approach toward learning new technologies.</p>
 
-<p>Their overall performance was excellent, and they proved to be a valuable contributor to the team.</p>
+<p>The candidate maintained professionalism, punctuality, and consistently delivered high-quality work.</p>
 
-<p>We highly recommend them for future professional opportunities and wish them continued success.</p>
+<p>They exhibited excellent teamwork, communication skills, and adaptability in a dynamic work environment.</p>
 
-<p><b>ID:</b> <span id="cid"></span></p>
+<p>Their overall performance was outstanding and highly appreciated by the organization.</p>
+
+<p>We confidently recommend them for future professional opportunities and wish them great success ahead.</p>
+
+<p><b>Certificate ID:</b> <span id="cid"></span></p>
 <p><b>Date:</b> <span id="date"></span></p>
 
-<button onclick="downloadPDF()">Download PDF</button>
+<div style="display:flex; justify-content:space-between; margin-top:40px; align-items:center;">
+
+<div>
+<p><b>HR Manager</b></p>
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Signature_of_John_Hancock.svg" width="150">
+</div>
+
+<div style="text-align:center;">
+<img id="qr" width="100"><br>
+<small>Scan for verification</small>
+</div>
+
+<div style="text-align:center;">
+<div style="border:3px solid #2563eb; border-radius:50%; width:100px; height:100px; display:flex; align-items:center; justify-content:center;">
+<b style="color:#2563eb;">STAMP</b>
+</div>
+</div>
+
+</div>
+
+<br><br>
+
+<div style="text-align:center;">
+<button onclick="downloadPDF()" style="padding:12px 20px; background:#2563eb; color:white; border:none;">
+Download Certificate (PDF)
+</button>
+</div>
 
 </div>
 </div>
@@ -86,15 +156,21 @@ footer {background:#0f172a;color:white;text-align:center;padding:15px;margin-top
 <button class="action" onclick="login()">Login</button>
 
 <div id="panel" class="hidden">
-<h3>Saved Certificates</h3>
+<h3>Certificates</h3>
 <ul id="list"></ul>
 </div>
+</div>
 
+<!-- CONTACT -->
+<div id="contact" class="card hidden">
+<h2>Contact</h2>
+<p>Email: technova@email.com</p>
+<p>Location: India</p>
 </div>
 
 </div>
 
-<footer>© 2026 TechNova Solutions</footer>
+<footer>© TechNova Solutions</footer>
 
 <script>
 let db = JSON.parse(localStorage.getItem("certs") || "{}");
@@ -112,7 +188,7 @@ function generate(){
   let id="TN"+Math.floor(Math.random()*100000);
   let date=new Date().toLocaleDateString();
 
-  db[id]={name,role,duration,date};
+  db[id]={name};
   localStorage.setItem("certs",JSON.stringify(db));
 
   document.getElementById("text").innerText=
@@ -123,6 +199,9 @@ function generate(){
   document.getElementById("cid").innerText=id;
   document.getElementById("date").innerText=date;
 
+  document.getElementById("qr").src =
+  "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data="+id;
+
   document.getElementById("certificate").style.display="block";
 }
 
@@ -131,10 +210,8 @@ function downloadPDF(){
 }
 
 function login(){
-  let u=document.getElementById("user").value;
-  let p=document.getElementById("pass").value;
-
-  if(u==="admin" && p==="1234"){
+  if(document.getElementById("user").value==="admin" &&
+     document.getElementById("pass").value==="1234"){
     document.getElementById("panel").classList.remove("hidden");
     load();
   } else {
