@@ -5,11 +5,7 @@
 <title>TechNova Solutions</title>
 
 <style>
-body {
-  margin:0;
-  font-family: Arial;
-  background:#f4f6f9;
-}
+body {margin:0;font-family:Arial;background:#f8fafc;}
 
 header {
   background:#0f172a;
@@ -20,13 +16,13 @@ header {
 
 nav {
   background:#1e293b;
-  padding:10px;
+  padding:12px;
   text-align:center;
 }
 
 nav button {
   margin:5px;
-  padding:10px;
+  padding:10px 15px;
   border:none;
   background:#2563eb;
   color:white;
@@ -34,7 +30,7 @@ nav button {
 }
 
 .container {
-  max-width:900px;
+  max-width:1000px;
   margin:auto;
   padding:20px;
 }
@@ -45,6 +41,8 @@ nav button {
   margin-top:20px;
   border-radius:10px;
 }
+
+.hidden {display:none;}
 
 input {
   width:100%;
@@ -60,15 +58,19 @@ button.action {
   border:none;
 }
 
-.hidden {
-  display:none;
-}
-
 #certificate {
   display:none;
-  margin-top:20px;
-  padding:20px;
   border:2px solid black;
+  padding:20px;
+  margin-top:20px;
+}
+
+footer {
+  background:#0f172a;
+  color:white;
+  text-align:center;
+  padding:15px;
+  margin-top:30px;
 }
 </style>
 </head>
@@ -77,39 +79,70 @@ button.action {
 
 <header>
 <h1>TechNova Solutions Pvt. Ltd.</h1>
-<p>Software Company & Certificate System</p>
+<p>Building Scalable Software & Digital Products</p>
 </header>
 
 <nav>
 <button onclick="show('home')">Home</button>
-<button onclick="show('generator')">Generator</button>
-<button onclick="show('verify')">Verify</button>
+<button onclick="show('services')">Services</button>
+<button onclick="show('projects')">Projects</button>
+<button onclick="show('product')">Products</button>
+<button onclick="show('contact')">Contact</button>
 </nav>
 
 <div class="container">
 
 <!-- HOME -->
 <div id="home" class="card">
-<h2>About Company</h2>
-<p>TechNova Solutions is a software company building web apps and automation tools.</p>
+<h2>Welcome to TechNova</h2>
+<p>We are a modern software company delivering high-quality web applications, automation tools, and scalable digital products.</p>
 
-<h3>Services</h3>
+<h3>Why Choose Us?</h3>
 <ul>
-<li>Web Development</li>
-<li>App Development</li>
-<li>Automation Tools</li>
+<li>Modern Tech Stack</li>
+<li>Fast Development</li>
+<li>Scalable Solutions</li>
 </ul>
 </div>
 
-<!-- GENERATOR -->
-<div id="generator" class="card hidden">
-<h2>Internship Certificate Generator</h2>
+<!-- SERVICES -->
+<div id="services" class="card hidden">
+<h2>Our Services</h2>
+<ul>
+<li>Web Development</li>
+<li>App Development</li>
+<li>AI Tools</li>
+<li>Automation Systems</li>
+</ul>
+</div>
+
+<!-- PROJECTS -->
+<div id="projects" class="card hidden">
+<h2>Projects</h2>
+<ul>
+<li>Portfolio Websites</li>
+<li>Business Dashboards</li>
+<li>Certificate Management System</li>
+</ul>
+</div>
+
+<!-- PRODUCTS -->
+<div id="product" class="card hidden">
+<h2>Our Product</h2>
+<p>We provide an internal Certificate Management System used for generating and verifying internship certificates.</p>
+
+<button onclick="showGenerator()">Open System</button>
+
+<!-- GENERATOR (hidden inside product) -->
+<div id="generator" class="hidden">
+
+<h3>Certificate Generator</h3>
 
 <input id="name" placeholder="Student Name">
 <input id="role" placeholder="Role">
 <input id="duration" placeholder="Duration">
 
-<button class="action" onclick="generate()">Generate Certificate</button>
+<button class="action" onclick="generate()">Generate</button>
 
 <div id="certificate">
 <h3>INTERNSHIP CERTIFICATE</h3>
@@ -123,29 +156,34 @@ button.action {
 
 <p>Sincerely,<br>HR Manager</p>
 </div>
-</div>
-
-<!-- VERIFY -->
-<div id="verify" class="card hidden">
-<h2>Verify Certificate</h2>
-
-<input id="vid" placeholder="Enter Certificate ID">
-<button class="action" onclick="verify()">Verify</button>
-
-<p id="result"></p>
-</div>
 
 </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="card hidden">
+<h2>Contact Us</h2>
+<p>Email: technova@email.com</p>
+<p>LinkedIn: TechNova Solutions</p>
+</div>
+
+</div>
+
+<footer>
+<p>© 2026 TechNova Solutions Pvt. Ltd.</p>
+</footer>
 
 <script>
 let db = JSON.parse(localStorage.getItem("db") || "{}");
 
 function show(section) {
-  document.getElementById("home").classList.add("hidden");
-  document.getElementById("generator").classList.add("hidden");
-  document.getElementById("verify").classList.add("hidden");
-
+  let sections = ["home","services","projects","product","contact"];
+  sections.forEach(s => document.getElementById(s).classList.add("hidden"));
   document.getElementById(section).classList.remove("hidden");
+}
+
+function showGenerator() {
+  document.getElementById("generator").classList.remove("hidden");
 }
 
 function generate() {
@@ -156,11 +194,11 @@ function generate() {
   let id = "TN" + Math.floor(Math.random()*100000);
   let date = new Date().toLocaleDateString();
 
-  db[id] = {name, role};
+  db[id] = {name};
   localStorage.setItem("db", JSON.stringify(db));
 
   document.getElementById("text").innerText =
-  name + " worked as " + role + " during " + duration;
+  name + " completed internship as " + role + " during " + duration;
 
   document.getElementById("cid").innerText = id;
   document.getElementById("date").innerText = date;
@@ -169,18 +207,6 @@ function generate() {
   "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=" + id;
 
   document.getElementById("certificate").style.display = "block";
-}
-
-function verify() {
-  let id = document.getElementById("vid").value;
-
-  if(db[id]) {
-    document.getElementById("result").innerText =
-    "Valid Certificate for " + db[id].name;
-  } else {
-    document.getElementById("result").innerText =
-    "Invalid Certificate";
-  }
 }
 </script>
 
